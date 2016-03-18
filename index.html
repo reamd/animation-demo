@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>动画案例</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .animationContent {
+            width: 95%;
+            padding: 0 10px;
+        }
+        .progress {
+            width: 1%;
+            height: 0;
+            border: 5px solid #00C8FD;
+        }
+        @-webkit-keyframes diyAnimation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @-moz-keyframes diyAnimation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes diyAnimation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .cssContent {
+            /*opacity: 0;*/
+            -webkit-transition: all 2s;
+            -moz-transition: all 2s;
+            -o-transition: all 2s;
+            transition: all 2s;
+
+        }
+        .cssContent img {
+            animation: diyAnimation 2s linear  infinite;
+            /*animation-play-state: paused;*/
+            /*transform: rotate(20deg)正顺负逆 translate(x,y) scale(x,y) skew(x,y) matrix(a,b,c,d,e,f)
+                transform-origin: x y ;
+            */
+            /*transform: translate(100px,0) scale(1.5,1.5) skew(20deg,10deg) ;*/
+
+        }
+
+    </style>
+</head>
+<body>
+<h1>1.requestAnimationFrame动画</h1>
+<button id="start">run</button>
+<div class="animationContent">
+    <div class="progress">1%</div>
+</div>
+<br/>
+<h1>2.css3动画</h1>
+<div class="cssContent">
+    <img src="music.svg">
+</div>
+<button id="change">stop</button>
+<h1>3.svg动画</h1>
+<div class="svgContent">
+    <svg width="200" height="250">
+        <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
+        <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
+
+        <circle cx="25" cy="75" r="20" stroke="red" fill="transparent" stroke-width="5"/>
+        <ellipse cx="75" cy="75" rx="20" ry="5" stroke="red" fill="transparent" stroke-width="5"/>
+
+        <line x1="10" x2="50" y1="110" y2="150" stroke="orange" fill="transparent" stroke-width="5"/>
+        <polyline points="60 110 65 120 70 115 75 130 80 125 85 140 90 135 95 150 100 145"
+                  stroke="orange" fill="transparent" stroke-width="5"/>
+
+        <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180"
+                 stroke="green" fill="transparent" stroke-width="5"/>
+
+        <path d="M20,230 Q40,205 50,230 T90,230" fill="none" stroke="blue" stroke-width="5"/>
+    </svg>
+</div>
+<script>
+    (function(){
+//        1.requestAnimationFrame动画
+        var stepEle = document.querySelector('.progress'),
+                i = 1;
+        function step() {
+            if(i < 101) {
+                stepEle.innerText = i + '%';
+                stepEle.style.width = stepEle.innerText;
+                i++;
+                requestAnimationFrame(step);
+            }
+        }
+        document.querySelector('#start').addEventListener('click', function() {
+            i = 1;
+            stepEle.innerText = i + '%';
+            stepEle.style.width = stepEle.innerText;
+            step();
+        });
+//        2.css动画
+        document.querySelector('#change').addEventListener('click', function() {
+            console.log(document.querySelector('img').style.animationPlaystate);
+            if(this.innerText === 'stop') {
+                this.innerText = 'start';
+                document.querySelector('img').setAttribute('style','animation-play-state: paused')
+            }else {
+                this.innerText = 'stop';
+                document.querySelector('img').setAttribute('style','animation-play-state: running')
+            }
+        });
+    })();
+</script>
+</body>
+</html>
