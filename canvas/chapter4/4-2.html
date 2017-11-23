@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>离屏绘制方法</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            padding: 10px;
+            background: transparent;
+            border: thin inset #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="controls">
+  <output id="scaleOutput">
+    1.0
+  </output>
+  <input id="scaleSlider" type="range" min="1" max="3.0" step="0.01" value="1.0"/>
+</div>
+<canvas id="canvas" width="600" height="400"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas'),
+        ctx = canvas.getContext('2d'),
+        offCanvas = document.createElement('canvas'),
+        offCtx = offCanvas.getContext('2d'),
+        img = new Image(),
+
+        scaleOutput = document.querySelector('#scaleOutput'),
+        scaleSlider = document.querySelector('#scaleSlider'),
+        scale = scaleSlider.value,
+        MINIMUM_SCALE = 1.0,
+        MAXIMUM_SCALE = 3.0;
+
+// function
+        function drawScaled() {
+          var w = canvas.width,
+              h = canvas.height,
+              sw = w * scale,
+              sh = h * scale;
+          ctx.drawImage(offCanvas, 0, 0, offCanvas.width, offCanvas.height,
+          -sw/2 + w/2, -sh/2 + h/2, sw, sh);
+        }
+        function drawScaleText(value) {
+          var text = parseFloat(value).toFixed(2);
+          scaleOutput.innerText = text;
+        }
+        function drawWatemark(ctx){
+          var lineOne = 'Copyright',
+          lineTwo = 'reamd',
+          textMetrics = null,
+          FONT_HEIGHT = 128;
+          ctx.save();
+          ctx.fillStyle = 'rgba(100, 140, 230, 0.5)';
+          ctx.strokeStyle = 'yellow';
+          ctx.shadowColor = 'rgba(50, 50, 50, 1.0)';
+          ctx.shadowOffsetX = 5;
+          ctx.shadowOffsetY = 5;
+          ctx.shadowBlur = 10;
+
+          ctx.font = FONT_HEIGHT + 'px Arial';
+          textMetrics = ctx.measureText(lineOne);
+          ctx.translate(canvas.width/2, canvas.height/2);
+          ctx.fillText(lineOne, -textMetrics.width/2, 0);
+          ctx.strokeText(lineOne, -textMetrics.width/2, 0);
+
+          textMetrics = ctx.measureText(lineTwo);
+          ctx.fillText(lineTwo, -textMetrics.width/2, FONT_HEIGHT);
+          ctx.strokeText(lineTwo, -textMetrics.width/2, FONT_HEIGHT);
+          ctx.restore();
+        }
+
+// event watch
+        scaleSlider.addEventListener('change', function(e){
+          scale = e.target.value;
+          if(scale < MINIMUM_SCALE) {
+            scale = MINIMUM_SCALE;
+          }else if (scale > MAXIMUM_SCALE) {
+            scale = MAXIMUM_SCALE;
+          }
+          drawScaled();
+          drawScaleText(scale);
+        });
+
+// init
+        offCanvas.width = canvas.width;
+        offCanvas.height = canvas.height;
+
+        img.src = 'dream.jpg';
+        img.onload = function(e){
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          offCtx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          drawWatemark(ctx);
+          drawWatemark(offCtx);
+          drawScaleText(scaleSlider.value);
+        };
+    })();
+</script>
+</body>
+</html>

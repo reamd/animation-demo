@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>剪纸效果</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            background: transparent;
+            /*border: thin inset #f00;*/
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="500" height="200"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#00a';
+        ctx.shadowColor = 'rgba(0, 0, 0, .7)';
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 5;
+
+//    圆形
+        ctx.beginPath();
+        ctx.arc(120, 120, 25, 0, Math.PI*2, true);
+        ctx.arc(120, 120, 50, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#a00';
+        ctx.beginPath();
+        ctx.arc(260, 120, 25, 0, Math.PI*2, true);
+        ctx.arc(260, 120, 50, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#0fa';
+        ctx.beginPath();
+        ctx.arc(400, 120, 25, 0, Math.PI*2, true);
+        ctx.arc(400, 120, 50, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#f0a';
+        ctx.beginPath();
+        ctx.arc(330, 80, 25, 0, Math.PI*2, true);
+        ctx.arc(330, 80, 50, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#fa0';
+        ctx.beginPath();
+        ctx.arc(190, 80, 25, 0, Math.PI*2, true);
+        ctx.arc(190, 80, 50, 0, Math.PI*2);
+        ctx.fill();
+    })();
+</script>
+</body>
+</html>

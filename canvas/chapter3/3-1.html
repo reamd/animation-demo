@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>文本</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            padding: 10px;
+            background: transparent;
+            border: thin inset #f00;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+
+        ctx.strokeStyle = 'rgba(255, 0, 0, .5)';
+        ctx.lineWidth = 2;
+        ctx.font = '24px 微软雅黑';
+        // ctx.fillText('你好世界', 100, 120);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(0, 255, 0, .5)';
+        ctx.fillText('你好世界', 150, 150);
+        var wh = ctx.measureText('你好世界').width;
+        ctx.beginPath();
+        ctx.moveTo(155 + wh/2, 140);
+        ctx.lineTo(155 + wh/2, 160);
+        ctx.stroke();
+    })();
+</script>
+</body>
+</html>

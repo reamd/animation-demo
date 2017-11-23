@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>剪纸效果-1</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            background: transparent;
+            /*border: thin inset #f00;*/
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#a2a2a2';
+        /*ctx.shadowColor = 'rgba(0, 0, 0, .7)';
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 5;*/
+//        矩形
+        ctx.rect(0, 0, canvas.width, canvas.height);
+
+        ctx.arc(150, 220, 50, 0, Math.PI*2, true);
+
+        ctx.moveTo(250, 20);
+        ctx.lineTo(150, 20);
+        ctx.lineTo(150, 70);
+        ctx.lineTo(250, 70);
+        ctx.closePath();
+
+        ctx.moveTo(100, 130);
+        ctx.lineTo(250, 130);
+        ctx.lineTo(150, 80);
+        ctx.closePath();
+        ctx.fill();
+    })();
+</script>
+</body>
+</html>

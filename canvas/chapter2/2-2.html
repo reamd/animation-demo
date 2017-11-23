@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>图形路径绘制</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            background: #fff;
+            border: thin inset #aaa;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+(function () {
+    var canvas = document.querySelector('#canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.font = '24px Arial';
+    ctx.fillStyle = '#00a';
+    ctx.strokeStyle = '#a00';
+//    文字
+    ctx.strokeText('stroke', 10, 20);
+
+    ctx.fillText('fill', 100, 20);
+
+    ctx.fillText('stroke & fill', 150, 20);
+    ctx.strokeText('stroke & fill', 150, 20);
+
+    ctx.lineWidth = 2;
+//    矩形
+    ctx.beginPath();
+    ctx.rect(10, 30, 50, 50);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.rect(100, 30, 50, 50);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.rect(180, 30, 50, 50);
+    ctx.fill();
+    ctx.stroke();
+
+//    圆形
+    ctx.beginPath();
+    ctx.arc(35, 120, 25, 0, Math.PI*3/2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(120, 120, 25, 0, Math.PI*3/2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(200, 120, 25, 0, Math.PI*3/2);
+    ctx.fill();
+    ctx.stroke();
+
+//    封闭圆形
+    ctx.beginPath();
+    ctx.arc(35, 190, 25, 0, Math.PI*3/2);
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(120, 190, 25, 0, Math.PI*3/2);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(200, 190, 25, 0, Math.PI*3/2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+})();
+</script>
+</body>
+</html>

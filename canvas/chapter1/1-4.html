@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>Rect的绘制</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            background: #fff;
+            border: thin inset #aaa;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        window.onload = function () {
+            var canvas = document.querySelector('#canvas'),
+                ctx = canvas.getContext('2d');
+
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 30;
+
+            ctx.font = '24px Arial';
+            ctx.fillText('Hello World!', 50, 160);
+
+            ctx.strokeStyle = 'goldenrod';
+            ctx.fillStyle = 'rgba(0, 0, 255, .5)';
+            ctx.strokeRect(50, 50, 200, 200);
+            ctx.fillRect(120, 120, 70, 70);
+
+            ctx.canvas.addEventListener('click', function () {
+               ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+        };
+    })();
+</script>
+</body>
+</html>

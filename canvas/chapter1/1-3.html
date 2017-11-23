@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>事件监听</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        .control {
+            background: #0fd;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+        #canvas {
+            position: absolute;
+            background: #fff;
+            border: thin inset #aaa;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300">canvas not supported</canvas>
+<button class="control">控制器</button>
+<script>
+    (function () {
+        function windowTocanvas(canvas, x, y) {
+            var bbox = canvas.getBoundingClientRect();
+
+            return {
+                x: (x - bbox.left) * (canvas.width / bbox.width),
+                y: (y - bbox.top) * (canvas.height / bbox.height)
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function () {
+            var canvas = document.querySelector('#canvas'),
+                context = canvas.getContext('2d');
+            canvas.addEventListener('mousemove', function (e) {
+                var loc = windowTocanvas(canvas, e.clientX, e.clientY);
+                console.log(loc);
+            })
+        });
+    })();
+</script>
+</body>
+</html>

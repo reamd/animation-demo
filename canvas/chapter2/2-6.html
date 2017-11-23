@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>line cap</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            padding: 10px;
+            background: transparent;
+            border: thin inset #f00;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#a2a2a2';
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.moveTo(20, 10);
+        ctx.lineTo(250, 10);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(20, 50);
+        ctx.lineTo(250, 50);
+        ctx.lineTo(250, 150);
+        ctx.closePath();
+        ctx.stroke();
+
+    })();
+</script>
+</body>
+</html>

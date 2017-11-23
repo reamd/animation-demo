@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>line cap</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            padding: 10px;
+            background: transparent;
+            border: thin inset #f00;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#a2a2a2';
+        ctx.font = '24px 微软雅黑';
+        ctx.lineWidth = 2;
+        ctx.arc(150, 150, 50, 0, Math.PI, false);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fillText('西瓜', 120, 50)
+        for (var i = 0; i < 75; i+=15) {
+            ctx.beginPath();
+            ctx.arc(120 + i, 165, 2, 0, Math.PI*2, false);
+            ctx.stroke();
+        }
+
+        for (var i = 0; i < 60; i+=15) {
+            ctx.beginPath();
+            ctx.arc(130 + i, 180, 2, 0, Math.PI*2, false);
+            ctx.stroke();
+        }
+    })();
+</script>
+</body>
+</html>

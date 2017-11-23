@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>多边形转换</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            padding: 10px;
+            background: transparent;
+            border: thin inset #f00;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = 'rgba(255, 0, 0, .5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(140, 140, 50, 0, Math.PI*2, false);
+        ctx.fill();
+
+        ctx.save();
+        ctx.clip();
+        ctx.beginPath();
+        ctx.arc(50, 50, 50, 0, Math.PI*2, false);
+        ctx.fill();
+
+        ctx.restore();
+        ctx.beginPath();
+        ctx.arc(250, 250, 50, 0, Math.PI*2, false);
+        ctx.fill();
+
+        ctx.save();
+        ctx.clip();
+        ctx.beginPath();
+        ctx.arc(200, 200, 50, 0, Math.PI*2, false);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.arc(50, 50, 50, 0, Math.PI*2, false);
+        ctx.fill();
+    })();
+</script>
+</body>
+</html>

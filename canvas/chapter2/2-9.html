@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>多边形</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            padding: 10px;
+            background: transparent;
+            border: thin inset #f00;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+        var radius = 50;
+        var PI = Math.PI;
+        ctx.fillStyle = '#a2a2a2';
+        ctx.lineWidth = 2;
+        ctx.moveTo(150, 10); // 中心(150, 60)
+        ctx.lineTo(150 + Math.cos(PI/4)*radius, 60 - Math.sin(PI/4)*radius);
+        ctx.lineTo(150 + radius, 60);
+        ctx.lineTo(150 + Math.cos(PI/4)*radius, 60 + Math.sin(PI/4)*radius);
+        ctx.lineTo(150, 60 + radius);
+        ctx.lineTo(150 - Math.cos(PI/4)*radius, 60 + Math.sin(PI/4)*radius);
+        ctx.lineTo(150 - radius, 60);
+        ctx.lineTo(150 - Math.cos(PI/4)*radius, 60 - Math.sin(PI/4)*radius);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fill();
+    })();
+</script>
+</body>
+</html>

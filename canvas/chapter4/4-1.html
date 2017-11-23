@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>绘制图形</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            padding: 10px;
+            background: transparent;
+            border: thin inset #f00;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<button class="scale">缩放</button>
+<button class="restore">原图绘制</button>
+<button class="reset">重置</button>
+<script>
+    (function () {
+        var canvas = document.querySelector('#canvas');
+        var ctx = canvas.getContext('2d');
+        var img = new Image();
+        var scale = document.querySelector('.scale');
+        var restore = document.querySelector('.restore');
+        var reset = document.querySelector('.reset');
+        img.src = './dream.jpg';
+        img.onload = function(){
+          scale.addEventListener('click', function() {
+            ctx.drawImage(img, 0, 0, 50, 50);
+          });
+          restore.addEventListener('click', function() {
+            ctx.drawImage(img, 0, 0);
+          });
+          reset.addEventListener('click', function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          });
+        };
+    })();
+</script>
+</body>
+</html>

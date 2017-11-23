@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="author" content="reamd">
+    <title>Title</title>
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        #canvas {
+            background: #fff;
+            border: thin inset #aaa;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    (function () {
+        window.onload = function () {
+            var canvas = document.querySelector('#canvas'),
+                ctx = canvas.getContext('2d'),
+            gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, 'blue');
+            gradient.addColorStop(0.25, '#fff');
+            gradient.addColorStop(0.5, 'purple');
+            gradient.addColorStop(0.75, 'red');
+            gradient.addColorStop(1, 'yellow');
+
+            ctx.shadowColor = 'rgba(0, 0, 0, .7)';
+            ctx.shadowOffsetX = 10;
+            ctx.shadowOffsetY = 10;
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, 50);
+
+
+            gradient = ctx.createLinearGradient(0, 50, 0, canvas.height);
+            gradient.addColorStop(0, 'blue');
+            gradient.addColorStop(0.25, '#fff');
+            gradient.addColorStop(0.5, 'purple');
+            gradient.addColorStop(0.75, 'red');
+            gradient.addColorStop(1, 'yellow');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 50, 50, canvas.height);
+
+            gradient = ctx.createRadialGradient(
+                canvas.width/2, canvas.height, 50,
+                canvas.width/2, 0, 10
+            );
+            gradient.addColorStop(0, 'blue');
+            gradient.addColorStop(0.25, '#fff');
+            gradient.addColorStop(0.5, 'purple');
+            gradient.addColorStop(0.75, 'red');
+            gradient.addColorStop(1, 'yellow');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 50, canvas.width, canvas.height);
+
+            var img = new Image;
+            img.src ='./b.png';
+            gradient = ctx.createPattern(img, 'repeat-y');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(200, 50, 100, 250);
+            ctx.fill();
+        };
+    })();
+</script>
+</body>
+</html>
